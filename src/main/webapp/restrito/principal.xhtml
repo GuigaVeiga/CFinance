@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:util="http://xmlns.jcp.org/jsf/composite/components/util" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/externa.xhtml">
+	<ui:define name="corpo">
+		Usuário logado #{request.remoteUser} 
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGroup>
+					<fieldset><legend>Lançamentos até hoje</legend>
+						<util:extrato height="100" 
+						lista="#{principalBean.listaAteHoje}" 
+						larguraDescricao="130"
+						botaoExclusao="false"
+						botaoEdicao="false"
+						colunaSaldo="false"/>
+					</fieldset>
+				</h:panelGroup>
+				<h:panelGroup>
+					<fieldset><legend>Lançamentos futuros</legend>
+						<util:extrato height="100" 
+						lista="#{principalBean.listaFuturos}" 
+						larguraDescricao="130"
+						botaoExclusao="false"
+						botaoEdicao="false"
+						colunaSaldo="false"/>
+					</fieldset>
+				</h:panelGroup>
+			</h:panelGrid>
+		</h:form>
+		<h:outputLink value="http://www.bmfbovespa.com.br/pt_br/servicos/market-data/cotacoes/" 
+		target="_blank" style="text-align: center;">
+			Cotações da Bolsa de Valores
+		</h:outputLink>
+		<h:panelGrid id="graficosAcao">
+			<p:tabView>
+				<p:tab title="Petrobras">
+					<h:graphicImage
+						value="http://ichart.finance.yahoo.com/z?s=PETR4.SA" />
+				</p:tab>
+				<p:tab title="Bovespa">
+					<h:graphicImage value="http://ichart.finance.yahoo.com/z?s=^BVSP" />
+				</p:tab>
+				<p:tab title="Itau Unibanco">
+					<h:graphicImage
+						value="http://ichart.finance.yahoo.com/z?s=ITUB4.SA" />
+				</p:tab>
+				<p:tab title="Gerdau">
+					<h:graphicImage
+						value="http://ichart.finance.yahoo.com/z?s=GOAU4.SA" />
+				</p:tab>
+			</p:tabView>
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>
+</html>
